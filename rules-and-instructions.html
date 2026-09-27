@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rules and Instructions — Elemia Guard</title>
+<style>
+:root {
+  --c-black:   #000000;
+  --c-periwinkle: #9999FF;
+  --c-cyan:    #66FFFF;
+  --c-purple:  #4C0099;
+  --c-blue:    #3333FF;
+  --c-mauve:   #A680B8;
+  --c-text: #F1EEF7;
+  --c-text-dim: #C9C2DA;
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; min-height: 100%; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--c-text);
+  background: linear-gradient(160deg, var(--c-black) 0%, #14001f 38%, var(--c-purple) 72%, #1a0033 100%);
+  background-attachment: fixed;
+  line-height: 1.6;
+  padding: 0 0 3rem;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.55);
+  border-bottom: 1px solid rgba(153, 153, 255, 0.25);
+  margin-bottom: 2rem;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-logo .logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.site-logo .logo-wordmark {
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+}
+
+.page-shell {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.page-card {
+  border: 1px solid rgba(153, 153, 255, 0.25);
+  border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.page-banner {
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  padding: 0.9rem 1rem;
+  background: rgba(0, 0, 0, 0.55);
+  border-bottom: 1px solid rgba(153, 153, 255, 0.25);
+}
+
+.page-body {
+  padding: 2.2rem 2.2rem 2.6rem;
+}
+
+.page-title {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.last-updated {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--c-text-dim);
+  margin: 0 0 2rem;
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 0.9rem;
+}
+
+.toc-icon {
+  color: var(--c-periwinkle);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.toc-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  color: var(--c-text);
+}
+
+.toc-label:hover { color: var(--c-cyan); }
+
+.toc-item .chevron {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--c-text-dim);
+  transition: transform 0.2s ease;
+}
+
+.toc-item.open .chevron { transform: rotate(90deg); }
+
+/* ---------- Rendered markdown (GitHub-README style) ---------- */
+
+.markdown-body {
+  display: none;
+  margin: 0 0 1.6rem 2rem;
+  padding: 0.3rem 0 0.3rem 1.1rem;
+  border-left: 2px solid rgba(153, 153, 255, 0.3);
+}
+
+.markdown-body.open { display: block; }
+
+.markdown-body h1 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--c-text);
+  margin: 1.4rem 0 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(153, 153, 255, 0.2);
+}
+
+.markdown-body h1:first-child { margin-top: 0; }
+
+.markdown-body h2 {
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--c-periwinkle);
+  margin: 1.2rem 0 0.5rem;
+}
+
+.markdown-body p {
+  color: var(--c-text-dim);
+  margin: 0 0 0.9rem;
+}
+
+.markdown-body strong { color: var(--c-text); }
+.markdown-body em { color: var(--c-cyan); font-style: italic; }
+
+.markdown-body ul {
+  margin: 0 0 1rem;
+  padding-left: 1.3rem;
+  color: var(--c-text-dim);
+}
+
+.markdown-body ul li { margin-bottom: 0.4rem; }
+
+.markdown-body ol {
+  margin: 0 0 1rem;
+  padding-left: 1.3rem;
+  color: var(--c-text-dim);
+}
+
+.markdown-body ol li { margin-bottom: 0.4rem; }
+
+.download-row {
+  text-align: center;
+  margin-top: 2.4rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(153, 153, 255, 0.2);
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+}
+
+.download-row a {
+  color: var(--c-cyan);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.download-row a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-logo">
+    <img src="data:image/png;base64,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" alt="Elemia Guard mark" class="logo-mark" />
+    <img src="data:image/png;base64,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" alt="ELEMIA GUARD" class="logo-wordmark" />
+  </span>
+</header>
+
+<div class="page-shell">
+  <div class="page-card">
+    <div class="page-banner">Rules and Instructions Page</div>
+
+    <div class="page-body">
+      <h1 class="page-title">Rules and Instructions</h1>
+      <p class="last-updated">Last Updated: 27 September 2026</p>
+
+      <div class="toc-item" id="toc-introduction" onclick="toggleSection('introduction', 'toc-introduction')">
+        <span class="toc-icon">〜</span>
+        <span class="toc-label">Introduction</span>
+        <span class="chevron">▶</span>
+      </div>
+      <div class="markdown-body" id="introduction">
+        <h1>What is ELEMIA GUARD</h1>
+        <p>Elemia Guard is a full - open-source community that</p>
+        <ol>
+          <li>Offers network security and Zero-Trust solutions,</li>
+          <li>Is a dedicated community for making the researches and findings possible to upgrade te software system</li>
+          <li>Trains the young people who studies IT in the colleges and providing them with skills required to be engineers and architects at the future.</li>
+        </ol>
+
+        <h1>The Goal of our OSC</h1>
+        <p>We are the commnuity where we use the skills of beginners and experts to raise the awareness and methodologies of defending the cyber world from the encountered threats, especially with the Arabic and Islamic world. Our goal is to get the largest number of contributors for this project and to be one of the leaders and pioneers of defending the cyber entities using innovative solutions.</p>
+
+        <h1>What do we offer for a contributor?</h1>
+        <p>We offer for our contributors some things that it is valuable for them:-</p>
+        <ol>
+          <li>Courses and roadmaps that will help the contributor know the exact way of network security process and how the cyber security software projects are developed and managed.</li>
+          <li>A certificate of appreciation and contribution for the participant even if the work is small.</li>
+          <li>For more than one work, they are offered <strong>beside the certificate</strong> a recommendation letter which is written inside it all the work made by them and under the supervision of the project manager/founder of the community and with the latest updates of career demands.</li>
+        </ol>
+      </div>
+
+      <div class="toc-item" id="toc-management" onclick="toggleSection('management', 'toc-management')">
+        <span class="toc-icon">〜</span>
+        <span class="toc-label">Management Details</span>
+        <span class="chevron">▶</span>
+      </div>
+      <div class="markdown-body" id="management">
+        <h1>Departments and Teams</h1>
+        <p>There are some departments in which the contributor can enter according to their skills and passion:-</p>
+
+        <h2>Networking and Simulation</h2>
+        <p>The team specialised in developing and updating the simulating program itself. They should design and implement the controller part of the system, in addition to adding some networking services like NAT, DHCP, DNS, etc.</p>
+
+        <h2>Policy Administration and Traffic Analysis (PATA)</h2>
+        <p>They are responsible for developing and updating the system of the firewalls, policy engines and the policy enforcement points. They are also responsible for everything related to monitoring and logging the network traffic across VLANs, updating and following the security policies and updating the machine-readable rules by the firewalls themselves.</p>
+
+        <h2>Research and Project Management</h2>
+        <p>The main team of managing and handling the processes of adding features, receive feedbacks from the customers, and give the instructions &amp; information to the team leaders inside the other teams to develop the system as needed.</p>
+
+        <h1>Rounding Methodologies</h1>
+        <p><em>Round</em>: A bounded time interval to finish some pre-determined work inside the system for some or all teams.<br />
+        <em>Period</em>: 7 days of development<br />
+        <em>Round Content Details</em>:-</p>
+        <ul>
+          <li>Departments/Teams involved</li>
+          <li>Number of periods for this round (often 2 or 4)</li>
+          <li>Version number updated</li>
+          <li>Team leaders and members for this round</li>
+        </ul>
+
+        <h1>Rules inside the Community</h1>
+
+        <h2>Project Manager</h2>
+        <ul>
+          <li>He puts the time of periods to work on the features, select the suitable team leaders, and determines a clear roadmap to walk through the period to finish smoothly the required work.</li>
+          <li>The person who is responsible for guiding and instructing the teams to design and implement a feature or to fix a bug.</li>
+          <li>He collaborates with the researchers in order to convert the ideas made by the researchers to a given reserved framework.</li>
+          <li>He receives the feedbacks fromt he customers and users to improve the future versions, in additon to measuring the KPIs and metrics of success of a certain round in order to make the decision of starting a new round.</li>
+        </ul>
+
+        <h2>Researcher</h2>
+        <ul>
+          <li>He makes his own researches in order to improve the software logistics, and that by reading the already-made raw researches and articles to be received by the project manager to be converted to the given framework for the team leaders.</li>
+        </ul>
+
+        <h2>Team Leader</h2>
+        <ul>
+          <li>He leads the whole team during the developing round. He assists them if there is a trouble during the implementation or a problem inside the idea itself.</li>
+          <li>The main role of the team leader is to convert the idea put inside the given framework to a design to be implemented by the team members.</li>
+          <li>He communicates with the project manager in order to tell them about the latest updates of the team members and the progress of design and implementation as well as the status of the project itself.</li>
+        </ul>
+
+        <h2>Team member</h2>
+        <p>The person who is responsible for selecting the technology to implement the creation the determined feature.</p>
+
+        <h1>Notes</h1>
+        <ul>
+          <li>The team member has the right to ask about the whole pipeline of developing the feature or fixing the bug. NO BLIND DEVELOPMENT!!</li>
+          <li>The team leader has the right to ask some questions for the project manager if there are some unclear details.</li>
+          <li>The team member (whatever their role) <strong>should discuss what he did by a clear and standard documentation</strong>.</li>
+          <li>The team leader will be automatically be a member inside the management center with the researchers.</li>
+          <li>Every contributor in every team (except the management hub) will be selected for <strong>only the current round</strong>. If they want to apply for the next round, then they feel free to do that.</li>
+          <li>The managers and researchers are planning for the other features before the next round begins. This can cause a lag betweem two intervals, especially when the idea is new.</li>
+          <li>The team leader will remain as a member inside the researchers team even if the round has been finished and they should go out (unless they want to be with us again). They have the priority to be with us above the other new applicants.</li>
+        </ul>
+
+        <h2>The whole pipeline of a round</h2>
+        <p>The round timeline is divided mainly into:-</p>
+        <ol>
+          <li>Calling for team members and planning interval</li>
+          <li>Team members preparation interval</li>
+          <li>Implementation Interval</li>
+        </ol>
+      </div>
+
+      <div class="download-row">
+        To download the instructions, <a href="#" onclick="return false;">click here.</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleSection(contentId, tocId) {
+  var content = document.getElementById(contentId);
+  var toc = document.getElementById(tocId);
+  if (content) content.classList.toggle('open');
+  if (toc) toc.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
