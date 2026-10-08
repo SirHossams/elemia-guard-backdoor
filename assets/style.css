@@ -777,3 +777,23 @@ blockquote.citation {
   text-decoration: none;
   font-weight: 600;
 }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1,
+.hero p,
+.hero blockquote.citation,
+#main-image {
+  opacity: 0;
+  animation: fade-up 0.8s ease forwards;
+}
+
+/* Stagger so each line appears after the previous one */
+.hero h1                  { animation-delay: 0.4s; }
+.hero p:nth-of-type(1)    { animation-delay: 0.7s; }
+.hero p.arabic            { animation-delay: 1.0s; }
+.hero blockquote.citation { animation-delay: 1.3s; }
+#main-image               { animation-delay: 0.1s; }
